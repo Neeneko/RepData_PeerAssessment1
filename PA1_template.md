@@ -33,6 +33,24 @@ print(plot)
 
 ![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
 
+### Calculate and report the mean and median of the total number of steps taken per day
+
+```r
+mean(sumData$sum)
+```
+
+```
+## [1] NA
+```
+
+```r
+median(sumData$sum)
+```
+
+```
+## [1] NA
+```
+
 
 ## What is the average daily activity pattern?
 
@@ -46,7 +64,22 @@ plot <- plot + labs(x = 'Date (month/day)')
 print(plot)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+
+### Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+
+
+```r
+print(data %>% group_by(interval) %>% summarise(mean=mean(steps,na.rm=TRUE)) %>% slice_max(mean))
+```
+
+```
+## # A tibble: 1 x 2
+##   interval  mean
+##      <int> <dbl>
+## 1      835  206.
+```
+
 
 ## Imputing missing values
 ### See what the missing values look like,  entire days are missing.
@@ -57,7 +90,7 @@ plot <- ggplot(data=missingData,aes(x=date,y=percent))+geom_bar(stat="identity",
 print(plot)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 ### Get the averages by interval and day of week
 
@@ -78,7 +111,7 @@ plot <- plot + theme(axis.text.x=element_blank())
 print(plot)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
 
 ### Run the Sum, Mean, and Median plots
 
@@ -103,7 +136,7 @@ plot3 <- plot3 + labs(y = '')
 grid <- grid.arrange(plot1,plot2,plot3,nrow=1)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
 
 ```r
 print(grid)
@@ -131,4 +164,4 @@ plot <- plot + labs(x = 'Interval')
 print(plot)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
